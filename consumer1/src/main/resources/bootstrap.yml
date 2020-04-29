@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      name: consumer1-config
+      uri: http://config:7755/
+      label: master
+      profile: dev

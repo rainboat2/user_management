@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      name: eureka3-server
+      uri: http://config:7755/
+      label: master
+      profile: dev

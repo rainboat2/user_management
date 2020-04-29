@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/rainboat2/springcloud-config.git
+          search-paths: eureka, zuul, provider, consumer, hystrix
+      label: master
+server:
+  port: 7755
+

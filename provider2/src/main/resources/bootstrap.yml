@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      name: provider2-config
+      uri: http://config:7755/
+      label: master
+      profile: dev

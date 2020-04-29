@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neu.provider2.dao.TbUserMapper" >
+  <resultMap id="BaseResultMap" type="com.neu.provider2.bean.TbUser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="login_name" property="loginName" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, login_name, username, password
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.neu.provider2.bean.TbUser" >
+    insert into tb_user (id, login_name, username, 
+      password)
+    values (#{id,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neu.provider2.bean.TbUser" >
+    insert into tb_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="loginName != null" >
+        login_name,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="loginName != null" >
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neu.provider2.bean.TbUser" >
+    update tb_user
+    <set >
+      <if test="loginName != null" >
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neu.provider2.bean.TbUser" >
+    update tb_user
+    set login_name = #{loginName,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectBy" parameterType="com.neu.provider2.bean.TbUser" resultType="com.neu.provider2.bean.TbUser">
+    select *
+    from tb_user
+    where id like concat('%', #{id}, '%') and
+        login_name like concat('%', #{loginName}, '%') and
+        username like concat('%', #{username}, '%');
+  </select>
+</mapper>
